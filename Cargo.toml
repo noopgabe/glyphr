@@ -1,0 +1,37 @@
+[package]
+name = "glyphr"
+version = "0.1.0"
+edition = "2021"
+description = "Fuzzy Nerd Font glyph picker TUI"
+license = "MIT"
+repository = "https://github.com/thesomewhatyou/glyphr"
+
+[lib]
+name = "glyphr"
+path = "src/lib.rs"
+
+[[bin]]
+name = "glyphr"
+path = "src/bin/glyphr.rs"
+
+[[bin]]
+name = "gen-snapshot"
+path = "src/bin/gen-snapshot.rs"
+
+[dependencies]
+ratatui = { version = "0.29", default-features = false, features = ["crossterm"] }
+crossterm = "0.28"
+arboard = { version = "3", features = ["wayland-data-control"] }
+nucleo-matcher = "0.3"
+rkyv = "0.8"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+anyhow = "1"
+clap = { version = "4", features = ["derive"] }
+
+[profile.release]
+lto = "fat"
+codegen-units = 1
+strip = true
+opt-level = "z"
+panic = "abort"
